@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: Routes.signInScreen,
+      initialRoute: Routes.splashScreen,
       getPages: routes,
       initialBinding: InitialBinding(),
     );

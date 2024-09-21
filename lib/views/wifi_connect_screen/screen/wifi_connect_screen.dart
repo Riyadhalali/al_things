@@ -1,6 +1,6 @@
-import 'package:al_things/views/wifi_connect_screen/controller/wifi_connect_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controller/wifi_connect_controller.dart';
 
 class WifiConnectScreen extends StatelessWidget {
   final WifiConnectController wifiConnectController =
@@ -18,7 +18,7 @@ class WifiConnectScreen extends StatelessWidget {
           children: [
             TextField(
               onChanged: (value) {
-                wifiConnectController.ssid.value = value;
+                wifiConnectController.ssid = value;
               },
               decoration: InputDecoration(
                 labelText: 'SSID',
@@ -26,7 +26,7 @@ class WifiConnectScreen extends StatelessWidget {
             ),
             TextField(
               onChanged: (value) {
-                wifiConnectController.password.value = value;
+                wifiConnectController.password = value;
               },
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -44,9 +44,26 @@ class WifiConnectScreen extends StatelessWidget {
               child: Text('Check Status'),
             ),
             SizedBox(height: 20),
-            Obx(
-              () => Text(
-                  'Connection Status: ${wifiConnectController.connectionStatus.value}'),
+            // Display progress bar while connecting
+            GetBuilder<WifiConnectController>(
+              builder: (controller) {
+                if (controller.isLoading) {
+                  return Column(
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 20),
+                    ],
+                  );
+                } else {
+                  return SizedBox.shrink();
+                }
+              },
+            ),
+            GetBuilder<WifiConnectController>(
+              builder: (controller) {
+                return Text(
+                    'Connection Status: ${controller.connectionStatus}');
+              },
             ),
           ],
         ),

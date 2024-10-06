@@ -16,6 +16,9 @@ dependencies:
   get: ^4.6.6
   dartz: ^0.10.1
   http: ^1.2.2
+  network_info_plus: ^4.0.0
+  permission_handler: ^10.0.0
+
 
 dev_dependencies:
   flutter_test:

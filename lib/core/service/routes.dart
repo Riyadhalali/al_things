@@ -4,4 +4,5 @@ class Routes {
   static String signInScreen = '/signInScreen';
   static String splashScreen = '/splashScreen';
   static String registerScreen = '/registerScreen';
+  static String navigationScreen = '/navigationScreen';
 }

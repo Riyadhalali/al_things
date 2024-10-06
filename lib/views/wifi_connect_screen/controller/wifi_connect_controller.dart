@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:network_info_plus/network_info_plus.dart';
 
 class WifiConnectController extends GetxController {
   String connectionStatus = 'Unknown';
@@ -65,7 +66,7 @@ class WifiConnectController extends GetxController {
         update();
       }
     } catch (e) {
-      connectionStatus = 'No connection to ESP8266';
+      connectionStatus = 'No connection to WiFi-Module';
       isLoading = false;
       update();
     }
@@ -86,8 +87,22 @@ class WifiConnectController extends GetxController {
     }
   }
 
+  // function to retrieve the current WiFi SSID
+  Future<void> getConnectedWifiSSID() async {
+    try {
+      final info = NetworkInfo();
+      String? currentSSID = await info.getWifiName();
+      ssid = currentSSID!;
+      update();
+    } catch (e) {
+      ssid = 'Error getting WiFi';
+      update();
+    }
+  }
+
   @override
   void onInit() {
+    getConnectedWifiSSID(); // Retrieve the SSID when the controller is initialized
     _startCheckingStatus();
     super.onInit();
   }

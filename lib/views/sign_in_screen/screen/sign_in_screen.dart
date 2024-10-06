@@ -1,3 +1,4 @@
+import 'package:al_things/views/bottom_navigation/screen/bottom_navigation_screen.dart';
 import 'package:al_things/views/register_screen/screen/register_screen.dart';
 import 'package:al_things/views/sign_in_screen/controller/sign_in_controller.dart';
 import 'package:al_things/views/wifi_connect_screen/screen/wifi_connect_screen.dart';
@@ -20,73 +21,88 @@ class SignInScreen extends StatelessWidget {
       body: GetBuilder(
         init: SignInController(),
         builder: (controller) {
-          return Column(
-            children: [
-              ImageBackground(assetImage: 'assets/logo/logo.png'),
-              TextFieldCustom(
-                controller: controller.usernameController,
-                labeltext: "username",
-                prefixicon: Icon(Icons.people_rounded),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              TextFieldCustom(
-                controller: controller.passwordController,
-                labeltext: "password",
-                prefixicon: Icon(Icons.password),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 25.0,
-                  ),
-                  Checkbox(
-                    checkColor: Colors.blue,
-                    value: controller.isChecked, // State of the checkbox
-                    onChanged: controller.toggleCheckbox,
-                  ),
-                  Text('Remember Me'),
-                ],
-              ),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.blueAccent),
-                  onPressed: () {
-                    Get.to(() => WifiConnectScreen());
-                  },
-                  child: Text("Config WiFi")),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Text(
-                      "I am New User?",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold),
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                ImageBackground(assetImage: 'assets/logo/logo.png'),
+                TextFieldCustom(
+                  controller: controller.usernameController,
+                  labeltext: "username",
+                  prefixicon: Icon(Icons.people_rounded),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                TextFieldCustom(
+                  controller: controller.passwordController,
+                  labeltext: "password",
+                  prefixicon: Icon(Icons.password),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 25.0,
                     ),
-                  ),
-                  Container(
-                    child: TextButton(
-                      onPressed: () {
-                        Get.to(() => RegisterScreen());
-                      },
+                    Checkbox(
+                      checkColor: Colors.blue,
+                      value: controller.isChecked, // State of the checkbox
+                      onChanged: controller.toggleCheckbox,
+                    ),
+                    Text('Remember Me'),
+                  ],
+                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.blueAccent),
+                    onPressed: () {
+                      controller.login();
+                    },
+                    child: Text("Login")),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
+                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.blueAccent),
+                    onPressed: () {
+                      Get.to(() => WifiConnectScreen());
+                    },
+                    child: Text("Config WiFi")),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
                       child: Text(
-                        'Register',
+                        "I am New User?",
                         style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
+                            color: Colors.black,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ),
-                ],
-              )
-            ],
+                    Container(
+                      child: TextButton(
+                        onPressed: () {
+                          Get.to(() => RegisterScreen());
+                        },
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                              color: Colors.blue, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           );
         },
       ),

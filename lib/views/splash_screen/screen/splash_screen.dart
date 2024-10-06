@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
                 Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  height: MediaQuery.of(context).size.height * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.5,
                   decoration: BoxDecoration(
                     //     borderRadius: BorderRadius.circular(35.0),
                     image: DecorationImage(
@@ -31,7 +31,11 @@ class SplashScreen extends StatelessWidget {
                 Text(
                   'AL-Things',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-                )
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                CircularProgressIndicator(),
               ],
             ));
           }),
